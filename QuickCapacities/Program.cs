@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Spectre.Console.Cli;
+﻿using Spectre.Console.Cli;
 
-namespace CapacitiesCli;
+namespace QuickCapacities;
 
 public static class Program
 {

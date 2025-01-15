@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using Spectre.Console;
 
-namespace CapacitiesCli;
+namespace QuickCapacities;
 
 public class CapacitiesApiService
 {

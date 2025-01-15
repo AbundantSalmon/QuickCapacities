@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapacitiesCli", "CapacitiesCli\CapacitiesCli.csproj", "{35B0A685-B481-4C68-A501-DE81315FADA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickCapacities", "QuickCapacities\QuickCapacities.csproj", "{35B0A685-B481-4C68-A501-DE81315FADA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

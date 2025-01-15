@@ -1,10 +1,8 @@
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
-using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace CapacitiesCli;
+namespace QuickCapacities;
 
 public class SetConfigCommand : Command<SetConfigCommand.Settings>
 {
