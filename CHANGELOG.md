@@ -1,6 +1,12 @@
 # Changelog
 
 This is where the changes in each release are documented.
+## 0.0.6 (2025-01-15)
+
+### Fixes
+
+- add github token to push
+
 ## 0.0.5 (2025-01-15)
 
 ### Fixes
