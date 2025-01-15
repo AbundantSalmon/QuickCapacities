@@ -1,6 +1,13 @@
 # Changelog
 
 This is where the changes in each release are documented.
+## 0.0.4 (2025-01-15)
+
+### Fixes
+
+- add workflow to automatically update homebrew tap
+- update install instructions
+
 ## 0.0.3 (2025-01-15)
 
 ### Fixes
