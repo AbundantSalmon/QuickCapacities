@@ -11,14 +11,16 @@ public class AddWeblinkCommand : AsyncCommand<AddWeblinkCommand.Settings>
     {
         [Description("Weblink")]
         [CommandArgument(0, "[link]")]
-        public required string Link { get; init; }
+        public required string? Link { get; init; }
 
         [CommandOption("-s|--spaces-id")] public string? SpacesId { get; init; }
     }
 
     public override Task<int> ExecuteAsync(CommandContext context, Settings settings)
     {
-        return CapacitiesApiService.SendWeblink(settings.Link,
+        string link = "";
+        link = settings.Link ?? AnsiConsole.Prompt(new TextPrompt<string>("Link: "));
+        return CapacitiesApiService.SendWeblink(link,
             settings.SpacesId ?? ConfigurationService.GetDefaultSpacesId());
     }
 }

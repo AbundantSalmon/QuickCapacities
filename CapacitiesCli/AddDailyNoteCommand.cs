@@ -11,14 +11,17 @@ public class AddDailyNoteCommand : AsyncCommand<AddDailyNoteCommand.Settings>
     {
         [Description("Note, enclose in quotes for notes with spaces")]
         [CommandArgument(0, "[note]")]
-        public required string Note { get; init; }
+        public required string? Note { get; init; }
 
         [CommandOption("-s|--spaces-id")] public string? SpacesId { get; init; }
     }
 
     public override Task<int> ExecuteAsync(CommandContext context, Settings settings)
     {
-        return CapacitiesApiService.SendDailyNote(settings.Note,
+        string note = "";
+        note = settings.Note ?? AnsiConsole.Prompt(new TextPrompt<string>("Note: "));
+
+        return CapacitiesApiService.SendDailyNote(note,
             settings.SpacesId ?? ConfigurationService.GetDefaultSpacesId());
     }
 }
