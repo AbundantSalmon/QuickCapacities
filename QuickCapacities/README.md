@@ -1,4 +1,4 @@
-# quick-capacities
+# Quick Capacities
 
 CLI to quickly add notes and weblinks to your [capacities](https://capacities.io/) workspace.
 
