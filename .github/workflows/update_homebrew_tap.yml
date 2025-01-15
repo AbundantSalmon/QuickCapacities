@@ -1,0 +1,43 @@
+name: Update Homebrew Formula Automatically
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-formula:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Homebrew Tap Repository
+        uses: actions/checkout@v4.1.7
+        with:
+          repository: AbundantSalmon/homebrew-quick-capacities
+
+      - name: Fetch Release Details
+        id: release
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          TAR_URL="https://github.com/AbundantSalmon/QuickCapacities/releases/download/$VERSION/qc-osx-arm64"
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "tarball_url=$TAR_URL" >> $GITHUB_ENV
+
+      - name: Download Tarball
+        run: curl -L ${{ env.tarball_url }} -o qc-osx-arm64
+
+      - name: Compute SHA-256
+        id: sha256
+        run: echo "sha256=$(shasum -a 256 qc-osx-arm64 | awk '{print $1}')" >> $GITHUB_ENV
+
+      - name: Update Formula
+        run: |
+          FORMULA="quick-capacities.rb"
+          sed -i "s|url .*|url \"${{ env.tarball_url }}\"|" $FORMULA
+          sed -i "s|sha256 .*|sha256 \"${{ env.sha256 }}\"|" $FORMULA
+          sed -i "s|version .*|version \"${{ env.version }}\"|" $FORMULA
+          git add $FORMULA
+          git commit -m "Update formula to version ${{ env.version }}"
+          git push
+
+      - name: Push Updated Formula
+        run: git push origin main
