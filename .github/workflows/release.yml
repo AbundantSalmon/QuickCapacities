@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-artifacts:
+    if: github.head_ref == 'release' && github.event.pull_request.merged == true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: osx-arm64
+            os: macos-latest
+    env:
+      archive_name: artifacts
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.target }}
+
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Build for Apple Silicon
+        run: |
+          dotnet publish -c Release -r ${{ matrix.target }} --self-contained -o qc-${{ matrix.target }} -p:AssemblyName=qc
+
+      - name: Set Archive Name (Non-Windows)
+        id: archive
+        run: echo "archive_name=qc-${{ matrix.target }}" >> $GITHUB_ENV
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: ${{ matrix.target }}
+          path: ${{ env.archive_name }}
+          if-no-files-found: error
+
+  release:
+    needs: [build-artifacts]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - uses: actions/download-artifact@v4.1.7
+        with:
+          path: artifacts
+          merge-multiple: true
+      - name: sdf
+        run: ls -R artifacts
+      - uses: knope-dev/action@v2.1.0
+        with:
+          version: 0.18.2
+      - run: knope release
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
