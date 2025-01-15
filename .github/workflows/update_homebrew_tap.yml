@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v4.1.7
         with:
           repository: AbundantSalmon/homebrew-quick-capacities
+          token: ${{ secrets.PAT }}
 
       - name: Fetch Release Details
         id: release
