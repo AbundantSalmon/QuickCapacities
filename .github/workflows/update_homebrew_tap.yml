@@ -42,7 +42,8 @@ jobs:
           sed -i "s|version .*|version \"${{ env.version }}\"|" $FORMULA
           git add $FORMULA
           git commit -m "Update formula to version ${{ env.version }}"
-          git push
 
       - name: Push Updated Formula
         run: git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
