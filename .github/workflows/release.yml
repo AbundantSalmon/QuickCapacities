@@ -29,7 +29,7 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Build for Apple Silicon
         run: |
-          dotnet publish -c Release -r ${{ matrix.target }} --self-contained -o qc-${{ matrix.target }} -p:AssemblyName=qc
+          dotnet publish -c Release -r ${{ matrix.target }} --self-contained -o qc-${{ matrix.target }} -p:AssemblyName=qc-${{ matrix.target }}
 
       - name: Set Archive Name (Non-Windows)
         id: archive
