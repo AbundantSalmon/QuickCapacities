@@ -18,8 +18,7 @@ jobs:
     env:
       archive_name: artifacts
 
-    runs-on: ${{ matrix.os }}
-    name: ${{ matrix.target }}
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4.1.7
@@ -29,17 +28,25 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Build for Apple Silicon
         run: |
-          dotnet publish -c Release -r ${{ matrix.target }} --self-contained -o qc-${{ matrix.target }} -p:AssemblyName=qc-${{ matrix.target }}
+          dotnet publish -c Release -r osx-arm64 --self-contained -o qc-osx-arm64 -p:AssemblyName=qc-osx-arm64
+      - name: Build for Intel Macs
+        run: |
+          dotnet publish -c Release -r osx-x64 --self-contained -o osx-x64 -p:AssemblyName=qc-osx-x64
+      - name: Create Universal Binary
+        run: |
+          mkdir qc-universal
+          lipo -create -output universal/qc-universal \
+          osx-arm64/qc-osx-arm64 \
+          osx-x64/qc-osx-x64
 
-      - name: Set Archive Name (Non-Windows)
-        id: archive
-        run: echo "archive_name=qc-${{ matrix.target }}" >> $GITHUB_ENV
-
+      - name: Create Tarball
+        run: |
+          tar -czf qc.tar.gz -C universal .
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: ${{ matrix.target }}
-          path: ${{ env.archive_name }}
+          name: qc-universal
+          path: universal
           if-no-files-found: error
 
   release:

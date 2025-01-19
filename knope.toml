@@ -6,7 +6,7 @@ changelog = "CHANGELOG.md"
 name = "prepare-release"
 
 [[package.assets]]
-path = "artifacts/qc-osx-arm64"
+path = "artifacts/qc-universal"
 
 [[workflows.steps]]
 type = "Command"
