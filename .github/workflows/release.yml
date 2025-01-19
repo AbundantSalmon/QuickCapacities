@@ -51,6 +51,9 @@ jobs:
           path: artifacts
       - name: Display the files
         run: ls -R artifacts
+      - name: Create Tarball
+        run: |
+          tar -czf qc.tar.gz -C artifacts .
       - uses: knope-dev/action@v2.1.0
         with:
           version: 0.18.2
