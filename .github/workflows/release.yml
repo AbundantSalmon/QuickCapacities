@@ -9,15 +9,6 @@ on:
 jobs:
   build-artifacts:
     if: github.event_name == 'workflow_dispatch' || github.head_ref == 'release' && github.event.pull_request.merged == true
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - target: osx-arm64
-            os: macos-latest
-    env:
-      archive_name: artifacts
-
     runs-on: macos-latest
 
     steps:
@@ -28,7 +19,7 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Build for Apple Silicon
         run: |
-          dotnet publish -c Release -r osx-arm64 --self-contained -o qc-osx-arm64 -p:AssemblyName=qc-osx-arm64
+          dotnet publish -c Release -r osx-arm64 --self-contained -o osx-arm64 -p:AssemblyName=qc-osx-arm64
       - name: Build for Intel Macs
         run: |
           dotnet publish -c Release -r osx-x64 --self-contained -o osx-x64 -p:AssemblyName=qc-osx-x64
@@ -45,7 +36,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: qc-universal
+          name: qc.tar.qz
           path: universal
           if-no-files-found: error
 
