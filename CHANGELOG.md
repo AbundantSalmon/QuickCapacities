@@ -1,6 +1,12 @@
 # Changelog
 
 This is where the changes in each release are documented.
+## 0.0.8 (2025-01-19)
+
+### Fixes
+
+- build universal macapp
+
 ## 0.0.7 (2025-01-15)
 
 ### Fixes
