@@ -6,7 +6,7 @@ changelog = "CHANGELOG.md"
 name = "prepare-release"
 
 [[package.assets]]
-path = "artifacts/qc.tar.gz"
+path = "artifacts/qc"
 
 [[workflows.steps]]
 type = "Command"
