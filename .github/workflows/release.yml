@@ -26,7 +26,7 @@ jobs:
       - name: Create Universal Binary
         run: |
           mkdir qc-universal
-          lipo -create -output universal/qc-universal \
+          lipo -create -output universal/qc \
           osx-arm64/qc-osx-arm64 \
           osx-x64/qc-osx-x64
 
