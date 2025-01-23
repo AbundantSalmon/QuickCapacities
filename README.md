@@ -17,7 +17,7 @@ qc weblink
 
 ## Install
 
-Can be quickly installed for M1+ Macs via homebrew
+Can be quickly installed for Macs via homebrew
 
 ```bash
 brew install AbundantSalmon/quick-capacities/quick-capacities
