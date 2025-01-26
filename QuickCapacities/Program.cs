@@ -14,6 +14,7 @@ public static class Program
             config.AddCommand<AddWeblinkCommand>("weblink");
             config.AddCommand<ShowConfigCommand>("show-config");
             config.AddCommand<SetConfigCommand>("set-config");
+            config.AddCommand<SearchCommand>("search");
         });
         return app.Run(args);
     }
