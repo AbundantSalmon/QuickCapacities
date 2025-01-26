@@ -17,12 +17,15 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+      - name: Extract version from package.json
+        id: get_version
+        run: echo "VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
       - name: Build for Apple Silicon
         run: |
-          dotnet publish -c Release -r osx-arm64 --self-contained -o osx-arm64 -p:AssemblyName=qc-osx-arm64
+          dotnet publish -c Release -r osx-arm64 --self-contained -o osx-arm64 -p:AssemblyName=qc-osx-arm64 -p:Version=$VERSION
       - name: Build for Intel Macs
         run: |
-          dotnet publish -c Release -r osx-x64 --self-contained -o osx-x64 -p:AssemblyName=qc-osx-x64
+          dotnet publish -c Release -r osx-x64 --self-contained -o osx-x64 -p:AssemblyName=qc-osx-x64 -p:Version=$VERSION
       - name: Create Universal Binary
         run: |
           mkdir universal

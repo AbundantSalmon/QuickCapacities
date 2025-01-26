@@ -15,6 +15,7 @@ public static class Program
             config.AddCommand<ShowConfigCommand>("show-config");
             config.AddCommand<SetConfigCommand>("set-config");
             config.AddCommand<SearchCommand>("search");
+            config.UseAssemblyInformationalVersion();
         });
         return app.Run(args);
     }
