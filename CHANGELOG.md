@@ -1,6 +1,12 @@
 # Changelog
 
 This is where the changes in each release are documented.
+## 0.0.10 (2025-01-26)
+
+### Features
+
+- Add search functionality
+
 ## 0.0.9 (2025-01-19)
 
 ### Fixes
