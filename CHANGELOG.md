@@ -1,6 +1,12 @@
 # Changelog
 
 This is where the changes in each release are documented.
+## 0.0.11 (2025-01-26)
+
+### Fixes
+
+- add version number to cli
+
 ## 0.0.10 (2025-01-26)
 
 ### Features
