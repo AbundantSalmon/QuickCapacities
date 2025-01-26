@@ -13,6 +13,7 @@ qc set-config -s "SPACE ID"
 
 qc daily
 qc weblink
+qc search
 ```
 
 ## Install
